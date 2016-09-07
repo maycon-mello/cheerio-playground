@@ -7,6 +7,7 @@
     "cheerio": "^0.22.0",
     "json-loader": "^0.5.4",
     "nodemon": "^1.10.2",
+    "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
     "react-router-redux": "^4.0.5",
     "redux": "^3.6.0",
@@ -20,14 +21,17 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.14.0",
     "chai": "^3.5.0",
+    "enzyme": "^2.4.1",
+    "jsdom": "^9.5.0",
     "mocha": "^3.0.2",
     "nodemon": "^1.10.2",
+    "react-ace": "^3.5.0",
     "sinon": "^1.17.5"
   },
   "scripts": {
     "start": "./node_modules/.bin/nodemon index",
     "build": "./node_modules/.bin/webpack",
-    "test": "./node_modules/.bin/nodemon --ext spec.js --watch ./src --watch ./test --exec 'NODE_ENV=test ./node_modules/.bin/mocha ./src ./test/setup.js --recursive --compilers js:babel-register --require ./test/config.js'"
+    "test": "./node_modules/.bin/nodemon --ext spec.js --watch ./src --watch ./test --exec 'NODE_ENV=test ./node_modules/.bin/mocha ./test/setup.js $(find src -name '*.spec.js')  --recursive --compilers js:babel-register --require ./test/config.js'"
   },
   "author": "",
   "license": "ISC"
