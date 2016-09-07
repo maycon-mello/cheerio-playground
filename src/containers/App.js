@@ -1,4 +1,5 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
+import CodeEditor from '../components/CodeEditor';
 
 export default class App extends Component {
 

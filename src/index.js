@@ -10,7 +10,7 @@ import configureStore from './store/configureStore';
 const store = configureStore();
 
 render(
-  <Provider store={store}>
+  <Provider store={store} history={hashHistory}>
     <Router routes={routes} />
   </Provider>,
   document.getElementById('root')
