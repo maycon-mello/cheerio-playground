@@ -44,11 +44,11 @@ describe('Actions', () => {
         <div class="test">test</div>
       `;
 
-      const fn = actions.run({ js, htmlSource});
+      const fn = actions.run();
       expect(fn).to.be.a('function');
 
       const dispatch = spy();
-      const getState = () => ({ js, htmlSource });
+      const getState = () => ({ code: { js, htmlSource } });
 
       fn(dispatch, getState);
 
@@ -71,7 +71,7 @@ describe('Actions', () => {
       expect(fn).to.be.a('function');
 
       const dispatch = spy();
-      const getState = () => ({ js, htmlSource });
+      const getState = () => ({ code: { js, htmlSource } });
 
       fn(dispatch, getState);
 

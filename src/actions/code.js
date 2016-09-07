@@ -23,7 +23,7 @@ export const setJs = (value) => ({
 
 export const run = () => {
   return (dispatch, getState) => {
-    let { js, htmlSource } = getState();
+    let { js, htmlSource } = getState().code;
     let { html, error } = Cheerio.parse(htmlSource, js);
 
     if (error) {
