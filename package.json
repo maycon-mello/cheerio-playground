@@ -6,14 +6,25 @@
   "dependencies": {
     "cheerio": "^0.22.0",
     "json-loader": "^0.5.4",
-    "nodemon": "^1.10.2"
+    "nodemon": "^1.10.2",
+    "react-router-redux": "^4.0.5",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
-    "nodemon": "^1.10.2"
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.14.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2",
+    "nodemon": "^1.10.2",
+    "sinon": "^1.17.5"
   },
   "scripts": {
     "start": "./node_modules/.bin/nodemon index",
-    "build": "./node_modules/.bin/webpack"
+    "build": "./node_modules/.bin/webpack",
+    "test": "./node_modules/.bin/nodemon --ext spec.js --watch ./src --watch ./test --exec 'NODE_ENV=test ./node_modules/.bin/mocha ./src ./test/setup.js --recursive --compilers js:babel-register --require ./test/config.js'"
   },
   "author": "",
   "license": "ISC"
