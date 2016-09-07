@@ -4,7 +4,7 @@ import {
   SET_HTML_OUTPUT,
 } from '../actions/code';
 
-const DEFAULT_STATE = {
+export const DEFAULT_STATE = {
   js: '',
   htmlSource: '',
   htmlOutput: '',
@@ -15,7 +15,19 @@ export default (state = DEFAULT_STATE, action) => {
     case SET_JS:
       return {
         ...state,
-        jsCode: action.value,
+        js: action.value,
+      };
+
+    case SET_HTML_SOURCE:
+      return {
+        ...state,
+        htmlSource: action.value,
+      };
+
+    case SET_HTML_OUTPUT:
+      return {
+        ...state,
+        htmlOutput: action.value,
       };
 
     default:

@@ -3,7 +3,7 @@ import {
   CLEAR_LOGS
 } from '../actions/logs';
 
-const DEFAULT_STATE = {
+export const DEFAULT_STATE = {
   logs: [],
 }
 
@@ -16,7 +16,7 @@ export default (state = DEFAULT_STATE, action) => {
       }
 
     case ADD_LOG:
-      let logs = [...state.logs, action.log];
+      let logs = [...state.logs, action.value];
       return {
         ...state,
         logs,
