@@ -5,7 +5,7 @@ export default class Cheerio {
 
   static parse(sourceHtml, jsCode) {
     let error;
-    let outputHtml;
+    let html;
 
     try {
       let $ = cheerio.load(sourceHtml);
@@ -13,11 +13,11 @@ export default class Cheerio {
       // TODO: Use Web Workers to parse html code
       eval(jsCode);
 
-      outputHtml = $.html();
+      html = $.html();
     } catch (err) {
       error = err;
     }
 
-    return {outputHtml, error};
+    return {html, error};
   }
 }

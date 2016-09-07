@@ -21,7 +21,7 @@ describe('Parsers', () => {
 
       let cheerio = Cheerio.parse(source, js);
 
-      expect(cheerio.outputHtml).equal(output);
+      expect(cheerio.html).equal(output);
       expect(cheerio.error).to.not.be.ok;
     });
 
