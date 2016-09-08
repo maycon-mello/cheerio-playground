@@ -10,6 +10,7 @@ export default class RawOutput extends Component {
       <CodeEditor
         title='Raw output'
         mode={EditorMode.html}
+        readOnly={true}
         value={htmlOutput}
       />
     );

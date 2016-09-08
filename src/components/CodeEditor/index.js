@@ -5,7 +5,7 @@ import AceEditor from 'react-ace';
 
 import 'brace/mode/javascript';
 import 'brace/mode/html';
-import 'brace/theme/monokai';
+import 'brace/theme/github';
 
 const ACE_PROPS = {
   $blockScrolling: true,
@@ -28,16 +28,20 @@ export default class CodeEditor extends Component {
 
   render() {
     let name = 'editor' + new Date().getTime();
-    let { value, title, mode } = this.props;
+    let { value, title, mode, readOnly } = this.props;
 
     return (
       <div className='code-view'>
         <h2>{ title }</h2>
         <AceEditor
+          className='editor'
           mode={mode}
-          theme='monokai'
+          theme='github'
           onChange={this.onChange}
           name={name}
+          width="100%"
+          height="350px"
+          readOnly={readOnly || false}
           editorProps={ACE_PROPS}
           value={value}
         />

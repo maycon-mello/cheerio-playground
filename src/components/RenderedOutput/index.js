@@ -4,12 +4,19 @@ import CodeEditor, { EditorMode } from '../CodeEditor';
 
 export default class RenderedOutput extends Component {
 
+  componentDidMount() {
+    this.props.run();
+  }
+
   render() {
 
     return (
       <div className='output-view'>
         <h2>Raw output</h2>
-        <div dangerouslySetInnerHTML={this.createMarkup()}/>
+        <div
+          className='content'
+          dangerouslySetInnerHTML={this.createMarkup()}
+        />
       </div>
     );
   }
