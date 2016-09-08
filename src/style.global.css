@@ -1,0 +1,16 @@
+
+.row {
+  border: 1px solid;
+}
+
+.column {
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+}
+
+.code-view,
+.output-view {
+  height: 400px;
+  overflow: hidden;
+}

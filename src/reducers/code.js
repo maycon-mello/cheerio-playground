@@ -4,11 +4,9 @@ import {
   SET_HTML_OUTPUT,
 } from '../actions/code';
 
-export const DEFAULT_STATE = {
-  js: '',
-  htmlSource: '',
-  htmlOutput: '',
-}
+import * as defaultState from './code/defaultState';
+
+export const DEFAULT_STATE = defaultState ;
 
 export default (state = DEFAULT_STATE, action) => {
   switch(action.type) {

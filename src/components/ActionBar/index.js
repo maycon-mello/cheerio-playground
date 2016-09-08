@@ -7,7 +7,7 @@ export default class ActionBar extends Component {
   render() {
     return (
       <div>
-        <button>Run</button>
+        <button onClick={this.props.run}>Run</button>
       </div>
     );
   }

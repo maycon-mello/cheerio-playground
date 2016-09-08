@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import HTMLEditor from '../components/HTMLEditor';
-import JavaScriptEditor from '../components/JavaScriptEditor';
-import RawOutput from '../components/RawOutput';
-import RenderedOutput from '../components/RenderedOutput';
-import ActionBar from '../components/ActionBar';
+import HTMLEditor from './HTMLEditor';
+import JavaScriptEditor from './JavaScriptEditor';
+import RawOutput from './RawOutput';
+import RenderedOutput from './RenderedOutput';
+import ActionBar from './ActionBar';
 
 export default class App extends Component {
 

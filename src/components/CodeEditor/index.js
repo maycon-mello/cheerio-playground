@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-
+import uuid from 'uuid';
 import brace from 'brace';
 import AceEditor from 'react-ace';
 
@@ -18,19 +18,23 @@ export const EditorMode = {
 
 export default class CodeEditor extends Component {
 
-  onChange(newValue) {
+  onChange = (newValue) => {
+    if (!this.props.onChange) {
+      return;
+    }
+
     this.props.onChange(newValue);
   }
 
   render() {
     let name = 'editor' + new Date().getTime();
-    let value = this.props.value || '';
+    let { value, title, mode } = this.props;
 
     return (
-      <div>
-        <h2>{ this.props.title }</h2>
+      <div className='code-view'>
+        <h2>{ title }</h2>
         <AceEditor
-          mode={this.props.mode}
+          mode={mode}
           theme='monokai'
           onChange={this.onChange}
           name={name}
