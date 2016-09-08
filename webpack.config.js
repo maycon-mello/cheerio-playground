@@ -2,14 +2,17 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
-    './src/index',
-  ],
+  entry: {
+    bundle: [
+      'webpack-dev-server/client?http://localhost:3535',
+      'webpack/hot/only-dev-server',
+        './src/index',
+    ],
+    parser: './src/parsers/index',
+  },
   output: {
     path: __dirname,
-    filename: 'bundle.js',
+    filename: '[name].js',
     publicPath: '/dist/',
   },
   module: {

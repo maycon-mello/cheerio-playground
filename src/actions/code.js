@@ -1,10 +1,9 @@
-import { Cheerio } from '../parsers';
+import * as Parser from '../parsers/client';
 import { addLog } from './logs';
 
 export const SET_JS = 'SET_JS';
 export const SET_HTML_SOURCE = 'SET_HTML_SOURCE';
 export const SET_HTML_OUTPUT = 'SET_HTML_OUTPUT';
-
 
 export const setHtmlSource = (value) => ({
   type: SET_HTML_SOURCE,
@@ -21,16 +20,20 @@ export const setJs = (value) => ({
   value,
 });
 
-export const run = () => {
-  return (dispatch, getState) => {
+export const run = () =>
+  (dispatch, getState) => {
     let { js, htmlSource } = getState().code;
-    let { html, error } = Cheerio.parse(htmlSource, js);
 
-    if (error) {
-      dispatch(addLog(error));
-      return;
-    }
+    // Parse the code with a web worker
+    Parser
+      .parse({ js, htmlSource })
+      .then(({ html, error }) => {
+        // If there is an error create the error log
+        if (error) {
+          return dispatch(addLog(error));
+        }
 
-    dispatch(setHtmlOutput(html));
-  }
-}
+        dispatch(setHtmlOutput(html));
+      });
+  };
+

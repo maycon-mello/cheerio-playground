@@ -7,13 +7,15 @@
     "cheerio": "^0.22.0",
     "json-loader": "^0.5.4",
     "nodemon": "^1.10.2",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "redux": "^3.6.0",
     "react-ace": "^3.5.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
     "react-router-redux": "^4.0.5",
-    "redux": "^3.6.0",
-    "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
+    "redux-logger": "^2.6.1",
     "uuid": "^2.0.2"
   },
   "devDependencies": {
