@@ -1,0 +1,11 @@
+@import 'variables';
+
+.container {
+  overflow: hidden;
+  padding: $padding;
+}
+
+.ace_editor {
+  border: 1px solid #aaa;
+  width: 100%;
+}

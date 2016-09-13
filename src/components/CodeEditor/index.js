@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import CSSModules from 'react-css-modules';
+import Styles from './style.scss';
 import uuid from 'uuid';
 import brace from 'brace';
 import AceEditor from 'react-ace';
@@ -16,6 +18,7 @@ export const EditorMode = {
   js: 'javascript',
 }
 
+@CSSModules(Styles)
 export default class CodeEditor extends Component {
 
   onChange = (newValue) => {
@@ -31,10 +34,10 @@ export default class CodeEditor extends Component {
     let { value, title, mode, readOnly } = this.props;
 
     return (
-      <div className='code-view'>
+      <div styleName='container'>
         <h2>{ title }</h2>
         <AceEditor
-          className='editor'
+          styleName='ace_editor'
           mode={mode}
           theme='github'
           onChange={this.onChange}

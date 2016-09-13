@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import CSSModules from 'react-css-modules';
+import Styles from './App.scss';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -10,22 +12,24 @@ import RawOutput from '../components/RawOutput';
 import RenderedOutput from '../components/RenderedOutput';
 import ActionBar from '../components/ActionBar';
 
-export class App extends Component {
 
+@CSSModules(Styles)
+export class App extends Component {
 
   render() {
     const { code, run } = this.props;
     console.log(this.props);
     return (
-      <div className='row'>
-        <ActionBar run={run}/>
-
-        <div className='column'>
+      <div styleName="app">
+        <div styleName='actionBar'>
+          <ActionBar run={run}/>
+        </div>
+        <div styleName='column'>
           <HTMLEditor {...code}/>
           <JavaScriptEditor {...code}/>
         </div>
 
-        <div className='column'>
+        <div styleName='column'>
           <RawOutput {...code}/>
           <RenderedOutput {...code} run={run}/>
         </div>
