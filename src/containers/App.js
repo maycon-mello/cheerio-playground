@@ -18,7 +18,7 @@ export class App extends Component {
 
   render() {
     const { code, run } = this.props;
-    console.log(this.props);
+
     return (
       <div styleName="app">
         <div styleName='actionBar'>
