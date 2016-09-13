@@ -9,13 +9,10 @@ export default class Cheerio {
 
     try {
       let $ = cheerio.load(sourceHtml);
-
-      // TODO: Use Web Workers to parse html code
       eval(jsCode);
-
       html = $.html();
     } catch (err) {
-      error = err;
+      error = err.toString();
     }
 
     return {html, error};

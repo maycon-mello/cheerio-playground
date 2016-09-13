@@ -18,7 +18,7 @@ describe('Store', () => {
       expect(logs).to.be.ok;
     });
 
-    it('should parse the html code without errors', () => {
+    it('should parse the html code without errors', (done) => {
       const store = configureStore();
       const htmlSource = "<div>Test</div>";
       const js = "$('div').addClass('test');";
@@ -26,27 +26,28 @@ describe('Store', () => {
 
       store.dispatch(code.setJs(js));
       store.dispatch(code.setHtmlSource(htmlSource));
+      store.subscribe(() => {
+        const state = store.getState();
+        expect(state.code.htmlOutput).equals(htmlOutput);
+        expect(state.logs.logs.length).equals(0);
+        done();
+      });
       store.dispatch(code.run());
-
-      const state = store.getState();
-
-      expect(state.code.htmlOutput).equals(htmlOutput);
-      expect(state.logs.logs.length).equals(0);
     });
 
-    it('should parse with errors', () => {
+    it('should parse with errors', (done) => {
       const store = configureStore();
       const htmlSource = "<div>Test</div>";
       const js = "$.find('div').addClass('test');";
 
       store.dispatch(code.setJs(js));
       store.dispatch(code.setHtmlSource(htmlSource));
+      store.subscribe(() => {
+        const state = store.getState();
+        expect(state.logs.logs.length).equals(1);
+        done();
+      });
       store.dispatch(code.run());
-
-      const state = store.getState();
-
-      expect(state.logs.logs.length).equals(1);
-
     });
 
   });

@@ -1,3 +1,8 @@
+/**
+ * Web Worker to transform html with cheerio
+ *
+ */
+
 import Cheerio from './cheerio';
 
 self.addEventListener('message', function (e) {

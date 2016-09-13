@@ -28,6 +28,7 @@ export const run = () =>
     Parser
       .parse({ js, htmlSource })
       .then(({ html, error }) => {
+
         // If there is an error create the error log
         if (error) {
           return dispatch(addLog(error));
@@ -36,4 +37,3 @@ export const run = () =>
         dispatch(setHtmlOutput(html));
       });
   };
-

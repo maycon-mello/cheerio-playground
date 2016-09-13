@@ -1,5 +1,10 @@
+/**
+ * Web Worker client
+ *
+ */
+
 const { host, protocol } = window.location;
-const worker = new Worker(`${protocol}//${host}/dist/parser.js`);
+const worker = new Worker(`${protocol}//${host}/public/parser.js`);
 
 export function parse({ js, htmlSource }) {
 

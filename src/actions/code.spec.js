@@ -33,7 +33,7 @@ describe('Actions', () => {
       });
     });
 
-    it('run should create SET_HTML_OUTPUT action', () => {
+    it('run should create SET_HTML_OUTPUT action', (done) => {
       const js = `
         $('div').addClass('test');
       `;
@@ -47,38 +47,37 @@ describe('Actions', () => {
       const fn = actions.run();
       expect(fn).to.be.a('function');
 
-      const dispatch = spy();
+      const dispatch = function(action) {
+        expect(action).to.deep.equal({
+          type: actions.SET_HTML_OUTPUT,
+          value: htmlOutput,
+        });
+        done();
+      };
+
       const getState = () => ({ code: { js, htmlSource } });
 
       fn(dispatch, getState);
-
-      expect(dispatch.firstCall.args[0]).to.deep.equal({
-        type: actions.SET_HTML_OUTPUT,
-        value: htmlOutput,
-      });
-
     });
 
-    it('running with error should create ADD_LOG action', () => {
+    it('running with error should create ADD_LOG action', (done) => {
       // Bad syntax js
-      const js = `
-        $.find('div').addClass('test');
-      `;
+      const js = `$.find('div').addClass('test');`;
 
       const htmlSource = '';
 
-      const fn = actions.run({ js, htmlSource});
+      const fn = actions.run();
       expect(fn).to.be.a('function');
 
-      const dispatch = spy();
+      const dispatch = function(action) {
+        expect(action.type).to.equal(logActions.ADD_LOG);
+        expect(action.value).to.be.ok;
+        done();
+      };
+
       const getState = () => ({ code: { js, htmlSource } });
 
       fn(dispatch, getState);
-
-      let dispatchAction = dispatch.firstCall.args[0];
-
-      expect(dispatchAction.type).to.equal(logActions.ADD_LOG);
-      expect(dispatchAction.value).to.be.ok;
 
     });
   });

@@ -34,15 +34,17 @@
     "jsx-loader": "^0.13.2",
     "mocha": "^3.0.2",
     "nodemon": "^1.10.2",
+    "react-addons-test-utils": "^15.3.1",
     "react-hot-loader": "^3.0.0-beta.3",
     "sinon": "^1.17.5",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.15.1"
+    "webpack-dev-server": "^1.15.1",
+    "webpack-hot-middleware": "^2.12.2"
   },
   "scripts": {
     "serve": "node server",
-    "build": "./node_modules/.bin/webpack",
+    "build": "./node_modules/.bin/webpack --config ./webpack.prod.config.js --progress --colors",
     "test": "./node_modules/.bin/nodemon --ext spec.js --watch ./src --watch ./test --exec 'NODE_ENV=test ./node_modules/.bin/mocha ./test/setup.js $(find src -name '*.spec.js')  --recursive --compilers js:babel-register --require ./test/config.js'"
   },
   "author": "",
