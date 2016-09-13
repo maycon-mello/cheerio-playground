@@ -30,7 +30,7 @@ export default class CodeEditor extends Component {
   }
 
   render() {
-    let name = 'editor' + new Date().getTime();
+    let name = 'editor' + uuid();
     let { value, title, mode, readOnly } = this.props;
 
     return (

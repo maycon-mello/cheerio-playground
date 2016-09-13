@@ -9,6 +9,8 @@ export default class Cheerio {
 
     try {
       let $ = cheerio.load(sourceHtml);
+      // let global = { $, cheerio };
+      // require('./helpers')(global);
       eval(jsCode);
       html = $.html();
     } catch (err) {

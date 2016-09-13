@@ -1,11 +1,11 @@
 import { jsdom } from 'jsdom';
+import hook from 'css-modules-require-hook';
+import sass from 'node-sass';
 
 const exposedProperties = ['window', 'navigator', 'document'];
 
 global.document = jsdom('');
 global.window = document.defaultView;
-
-require('./mocks/worker.js');
 
 Object.keys(document.defaultView).forEach((property) => {
   if (typeof global[property] === 'undefined') {
@@ -19,3 +19,10 @@ global.navigator = {
   platform: 'linux',
   appName: '',
 };
+
+hook({
+  extensions: [ '.scss' ],
+  preprocessCss: data => data,
+});
+
+require('./mocks/worker.js');

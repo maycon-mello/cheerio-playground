@@ -31,7 +31,9 @@
     "babel-register": "^6.14.0",
     "chai": "^3.5.0",
     "css-loader": "^0.25.0",
+    "css-modules-require-hook": "^4.0.2",
     "enzyme": "^2.4.1",
+    "ignore-styles": "^5.0.1",
     "jsdom": "^9.5.0",
     "json-loader": "^0.5.4",
     "jsx-loader": "^0.13.2",
@@ -52,7 +54,7 @@
     "webpack-hot-middleware": "^2.12.2"
   },
   "scripts": {
-    "serve": "node server",
+    "start": "node server",
     "build": "./node_modules/.bin/webpack --config ./webpack.prod.config.js --progress --colors",
     "test": "./node_modules/.bin/nodemon --ext spec.js --watch ./src --watch ./test --exec 'NODE_ENV=test ./node_modules/.bin/mocha ./test/setup.js $(find src -name '*.spec.js')  --recursive --compilers js:babel-register --require ./test/config.js'"
   },
