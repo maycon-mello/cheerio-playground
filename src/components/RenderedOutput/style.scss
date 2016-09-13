@@ -1,0 +1,15 @@
+@import 'variables';
+
+.container {
+  overflow: hidden;
+  padding: $padding;
+}
+
+.content {
+  background: #eee;
+  height: 100%;
+  padding: $padding;
+  border: 1px solid #aaa;
+  height: 250px;
+  overflow: scroll;
+}

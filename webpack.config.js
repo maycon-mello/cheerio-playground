@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
   entry: {
@@ -24,18 +25,26 @@ module.exports = {
       test: /\.json$/,
       loader: 'json-loader'
     },{
-      test: /\.global\.css$/,
+      test: /\.global\.scss$/,
       loaders: [
         'style-loader',
-        'css-loader?sourceMap'
+        'css-loader',
+        'sass-loader?sourceMap',
       ]
     },{
-      test: /^((?!\.global).)*\.css$/,
+      test: /^((?!\.global).)*\.scss$/,
       loaders: [
-        'style-loader',
-        'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+        'style',
+        'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+        'sass'
       ]
     }],
+  },
+  postcss: function () {
+    return [autoprefixer];
+  },
+  sassLoader: {
+    includePaths: [path.resolve(__dirname, "./src/style")]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

@@ -1,0 +1,22 @@
+@import 'variables';
+
+.app {
+  height: 100vh;
+}
+
+.column {
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+  height: calc(100% - 30px);
+}
+
+.column > div {
+  height: 50%;
+  overflow: hidden;
+}
+
+.actionBar {
+  padding: $padding;
+  height: 30px;
+}
