@@ -29,6 +29,7 @@ export default class CodeEditor extends Component {
     this.props.onChange(newValue);
   }
 
+
   render() {
     let name = 'editor' + uuid();
     let { value, title, mode, readOnly } = this.props;
@@ -47,6 +48,7 @@ export default class CodeEditor extends Component {
           readOnly={readOnly || false}
           editorProps={ACE_PROPS}
           value={value}
+          fontSize={13}
         />
       </div>
     );

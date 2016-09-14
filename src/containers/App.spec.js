@@ -6,11 +6,13 @@ import { App } from './App';
 
 import HTMLEditor from '../components/HTMLEditor';
 import JavaScriptEditor from '../components/JavaScriptEditor';
+import configureStore from '../store/configureStore';
 
 let props = {
   code: {
     js: 'test'
-  }
+  },
+  actions: {}
 };
 
 describe('<App />', () => {

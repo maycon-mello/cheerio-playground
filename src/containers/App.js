@@ -12,26 +12,25 @@ import RawOutput from '../components/RawOutput';
 import RenderedOutput from '../components/RenderedOutput';
 import ActionBar from '../components/ActionBar';
 
-
 @CSSModules(Styles)
 export class App extends Component {
 
   render() {
-    const { code, run } = this.props;
+    const { code, actions } = this.props;
 
     return (
       <div styleName="app">
         <div styleName='actionBar'>
-          <ActionBar run={run}/>
+          <ActionBar run={actions.run}/>
         </div>
         <div styleName='column'>
-          <HTMLEditor {...code}/>
-          <JavaScriptEditor {...code}/>
+          <HTMLEditor {...code} {...actions}/>
+          <JavaScriptEditor {...code} {...actions}/>
         </div>
 
         <div styleName='column'>
-          <RawOutput {...code}/>
-          <RenderedOutput {...code} run={run}/>
+          <RawOutput {...code} {...actions}/>
+          <RenderedOutput {...code} run={actions.run}/>
         </div>
       </div>
     );
@@ -39,6 +38,8 @@ export class App extends Component {
 }
 
 const mapStateToProps = (state) => state ;
-const mapDispatchToProps = dispatch => bindActionCreators(CodeActions, dispatch);
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(CodeActions, dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

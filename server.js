@@ -16,9 +16,11 @@ if (process.env.NODE_ENV !== 'production') {
   const config = require('./webpack.dev.config.js');
   const compiler = webpack(config);
 
-  app.use(webpackHotMiddleware(compiler));
+  app.use(webpackHotMiddleware(compiler, {
+    log: console.log
+  }));
   app.use(webpackDevMiddleware(compiler, {
-    noInfo: true,
+    noInfo: false,
     publicPath: config.output.publicPath
   }));
 }

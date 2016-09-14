@@ -5,8 +5,8 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
   entry: {
     bundle: [
-      'webpack-dev-server/client?http://localhost:8080',
-      'webpack/hot/only-dev-server',
+      'webpack/hot/dev-server',
+      'webpack-hot-middleware/client',
         './src/index',
     ],
     parser: './src/parsers/index',
@@ -19,7 +19,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      loaders: ['babel-loader'],
+      loaders: ['react-hot', 'babel'],
       include: path.join(__dirname, 'src'),
     },{
       test: /\.json$/,
