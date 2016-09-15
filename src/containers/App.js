@@ -40,10 +40,11 @@ export class App extends Component {
           <RawOutput htmlOutput={code.htmlOutput} />
           <RenderedOutput htmlOutput={code.htmlOutput} />
         </div>
-
-        <div styleName='logs'>
-          { logs.logsVisible && <Logs {...logs}/> }
-        </div>
+        { logs.logsVisible &&
+          <div styleName='logs'>
+             <Logs {...logs}/>
+          </div>
+        }
       </div>
     );
   }

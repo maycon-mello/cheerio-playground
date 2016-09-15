@@ -1,12 +1,10 @@
 export const htmlSource =
 `<html>
 <head>
-  <title> Tritium Tester </title>
+  <title>Cheerio Playground</title>
 </head>
 <body>
-  <div id="header">
-    <img src="https://s3.amazonaws.com/moovweb-site-assets/logos/moovweb_small_cropped.jpg" alt="Logo" width="200px">
-  </div>
+  <h1>Cheerio</h1>
   <div id="content">
     <ol>
       <li>Create</li>
@@ -14,7 +12,7 @@ export const htmlSource =
       <li>Publish</li>
     </ol>
     <div id="courses">
-      <p>Check out our <a>tutorials</a> to start mobilizing your site today!</p>
+      <p>paragraph content</p>
     </div>
   </div>
 </body>

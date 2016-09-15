@@ -5,7 +5,13 @@
 }
 
 .run, .logs, .clearLogs {
-  padding: $padding;
-  background: white;
+  padding: $padding * 2;
+  background: #fff;
   border: 1px solid #ccc;
+  margin-right: $margin / 2;
+  color: black;
+}
+.run {
+  background: #333;
+  color: white;
 }
