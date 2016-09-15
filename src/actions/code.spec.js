@@ -15,6 +15,15 @@ describe('Actions', () => {
       });
     });
 
+    it('setAutoRun should create SET_AUTO_RUN action', () => {
+      const value = true;
+      const action = actions.setAutoRun(value);
+      expect(action).to.deep.equal({
+        type: actions.SET_AUTO_RUN,
+        value,
+      });
+    });
+
     it('setHtmlOutput should create SET_HTML_OUTPUT action', () => {
       const value = `<div>Test</div>`;
       const action = actions.setHtmlOutput(value);

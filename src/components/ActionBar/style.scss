@@ -4,6 +4,8 @@
 
 }
 
-.run {
-  padding: $padding / 2;
+.run, .logs, .clearLogs {
+  padding: $padding;
+  background: white;
+  border: 1px solid #ccc;
 }

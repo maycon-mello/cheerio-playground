@@ -21,5 +21,14 @@ describe('Actions', () => {
         type: actions.CLEAR_LOGS
       });
     });
+
+    it('showLogs should create SHOW_LOGS action', () => {
+      const action = actions.showLogs(true);
+
+      expect(action).to.deep.equal({
+        type: actions.SHOW_LOGS,
+        value: true,
+      });
+    });
   });
 });

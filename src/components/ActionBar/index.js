@@ -7,12 +7,18 @@ import Styles from './style.scss';
 export default class ActionBar extends Component {
 
   render() {
+    const { logs, run, clearLogs, showLogs, logsVisible } = this.props;
+
     return (
       <div>
-        <button
-          styleName='run'
-          onClick={this.props.run}>
-          Run
+        <button styleName='run' onClick={run}>
+          <i className='fa fa-play'/>
+        </button>
+        <button styleName='logs' onClick={() => { showLogs(!logsVisible)}}>
+          Logs ({logs.length})
+        </button>
+        <button styleName='clearLogs' onClick={clearLogs}>
+          Clear logs
         </button>
       </div>
     );

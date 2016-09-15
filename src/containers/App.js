@@ -5,41 +5,61 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as CodeActions from '../actions/code';
+import * as LogActions from '../actions/logs';
 
 import HTMLEditor from '../components/HTMLEditor';
 import JavaScriptEditor from '../components/JavaScriptEditor';
 import RawOutput from '../components/RawOutput';
 import RenderedOutput from '../components/RenderedOutput';
 import ActionBar from '../components/ActionBar';
+import Logs from '../components/Logs';
 
 @CSSModules(Styles)
 export class App extends Component {
 
   render() {
-    const { code, actions } = this.props;
+    const { code, logs, actions } = this.props;
+    let columnStyle = logs.logsVisible ? 'columnLogs' : 'column';
 
     return (
-      <div styleName="app">
+      <div styleName='app'>
         <div styleName='actionBar'>
-          <ActionBar run={actions.run}/>
-        </div>
-        <div styleName='column'>
-          <HTMLEditor {...code} {...actions}/>
-          <JavaScriptEditor {...code} {...actions}/>
+          <ActionBar {...logs} {...actions}/>
         </div>
 
-        <div styleName='column'>
-          <RawOutput {...code} {...actions}/>
-          <RenderedOutput {...code} run={actions.run}/>
+        <div styleName={columnStyle}>
+          <HTMLEditor
+            htmlSource={code.htmlSource}
+            setHtmlSource={actions.setHtmlSource} />
+          <JavaScriptEditor
+            js={code.js}
+            setJs={actions.setJs} />
+        </div>
+
+        <div styleName={columnStyle}>
+          <RawOutput htmlOutput={code.htmlOutput} />
+          <RenderedOutput htmlOutput={code.htmlOutput} />
+        </div>
+
+        <div styleName='logs'>
+          { logs.logsVisible && <Logs {...logs}/> }
         </div>
       </div>
     );
   }
+
+  componentDidMount() {
+    this.props.actions.run();
+  }
+
 }
 
-const mapStateToProps = (state) => state ;
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(CodeActions, dispatch)
+const mapStateToProps = (state) => state;
+const mapDispatchToProps = (dispatch) => ({
+  actions: {
+    ...bindActionCreators(CodeActions, dispatch),
+    ...bindActionCreators(LogActions, dispatch)
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

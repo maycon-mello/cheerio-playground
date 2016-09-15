@@ -1,22 +1,36 @@
 @import 'variables';
 
+$actionBarHeight: 40px;
+$logsHeight: 150px;
+
 .app {
   height: 100vh;
 }
 
-.column {
+.column, .columnLogs {
   display: inline-block;
   width: 50%;
   vertical-align: top;
-  height: calc(100% - 30px);
+  height: calc(100% - #{$actionBarHeight});
 }
 
-.column > div {
-  height: 50%;
-  overflow: hidden;
+.columnLogs {
+  height: calc(100% - #{$logsHeight + $actionBarHeight});
+}
+
+.column, .columnLogs {
+  > div {
+    height: 50%;
+    overflow: hidden;
+  }
 }
 
 .actionBar {
   padding: $padding;
-  height: 30px;
+  height: $actionBarHeight;
+}
+
+.logs {
+  padding: $padding;
+  height: $logsHeight;
 }

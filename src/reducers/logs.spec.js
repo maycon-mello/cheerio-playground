@@ -21,5 +21,11 @@ describe('Reducers', () => {
       let state = logs(undefined, {});
       expect(state.logs.length).to.equal(0);
     });
+
+    it('should handle SHOW_LOGS', () => {
+      let value = true;
+      let state = logs(undefined, actions.showLogs(value));
+      expect(state.logsVisible).to.equal(value);
+    });
   });
 });

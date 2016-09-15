@@ -3,16 +3,17 @@ import CSSModules from 'react-css-modules';
 import Styles from './style.scss';
 
 @CSSModules(Styles)
-export default class RenderedOutput extends Component {
+export default class Logs extends Component {
 
   render() {
-    let html = 'data:text/html;charset=utf-8,' + encodeURI(this.props.htmlOutput);
+    let logs = this.props.logs.map(log => {
+      return <div styleName='log'>{log}</div>
+    });
+
     return (
       <div styleName='container'>
-        <h2>Raw output</h2>
-        <iframe styleName='content' src={html} />
+        { logs }
       </div>
     );
   }
-
 }

@@ -16,6 +16,12 @@ describe('Reducers', () => {
       expect(state.js).to.equal(value);
     });
 
+    it('should handle SET_AUTO_RUN', () => {
+      let value = true;
+      let state = code(undefined, actions.setAutoRun(value));
+      expect(state.autoRun).to.equal(value);
+    });
+
     it('should handle SET_HTML_SOURCE', () => {
       let value = '<div>Test</div>'
       let state = code(undefined, actions.setHtmlSource(value));

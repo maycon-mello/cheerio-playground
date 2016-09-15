@@ -1,6 +1,8 @@
+@import 'variables';
+
 body {
-  font-size: 'Roboto', sans-serif;
-  background: #eee;
+  font-family: 'Roboto', sans-serif;
+  background: $color-background;
   margin: 0;
 }
 
@@ -9,9 +11,11 @@ div {
 }
 
 h2 {
-  font-size: 14px;
+  font-size: 13px;
+  background: #333;
   margin: 0;
   padding: 5px;
-  font-weight: bold;
-  display: inline-block;
+  font-weight: normal;
+  display: block;
+  color: $color-title;
 }
