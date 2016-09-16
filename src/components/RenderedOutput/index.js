@@ -9,7 +9,7 @@ export default class RenderedOutput extends Component {
     let html = 'data:text/html;charset=utf-8,' + encodeURI(this.props.htmlOutput);
     return (
       <div styleName='container'>
-        <h2>Rendered output</h2>
+        <h2 styleName='title'>Rendered output</h2>
         <iframe styleName='content' src={html} />
       </div>
     );

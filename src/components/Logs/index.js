@@ -12,6 +12,7 @@ export default class Logs extends Component {
 
     return (
       <div styleName='container'>
+        <h2 styleName="title">Logs</h2>
         { logs }
       </div>
     );

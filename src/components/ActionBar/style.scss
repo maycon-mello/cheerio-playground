@@ -4,14 +4,51 @@
 
 }
 
+
+
 .run, .logs, .clearLogs {
   padding: $padding * 2;
-  background: #fff;
-  border: 1px solid #ccc;
-  margin-right: $margin / 2;
-  color: black;
+  background: #1A7B72;
+  border: 0;
+  margin-right: $margin / 3;
+  color: white;
+  font-weight: 300;
+  font-family: 'Oxygen', sans-serif;
+  cursor: pointer;
+  transition: background-color .3s;
+  i {
+    padding-right: $padding;
+  }
+  &:hover {
+    background: #DA5647;
+  }
+  &.active {
+    background: #DA5647;
+  }
+}
+
+.logs {
+  position: relative;
+  span {
+    top: 4px;
+    right: 2px;
+    padding: 0 4px;
+    position: absolute;
+    font-size: 9px;
+    background: white;
+    color: black;
+    // padding: 5px;
+    border-radius: 50%;
+  }
 }
 .run {
-  background: #333;
+  background: #1A7B72;
   color: white;
+}
+
+.github {
+  float: right;
+  color: white;
+  margin-right: $margin;
+  font-size: 30px;
 }

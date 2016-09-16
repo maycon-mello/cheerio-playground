@@ -3,10 +3,22 @@
 .container {
   overflow: hidden;
   padding: $padding;
+  height:100%;
 }
 
 .ace_editor {
   border: 1px solid #aaa;
   width: 100%;
   font-size: 13px !important;
+}
+
+:global .CodeMirror-overlayscroll-vertical > div {
+  background: #1A7B72;
+}
+
+:global .ReactCodeMirror {
+  height: calc(100% - 25px);
+  .CodeMirror {
+    height: 100%;
+  }
 }

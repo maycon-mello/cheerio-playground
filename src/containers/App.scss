@@ -1,6 +1,6 @@
 @import 'variables';
 
-$actionBarHeight: 40px;
+$actionBarHeight: 45px;
 $logsHeight: 150px;
 
 .app {
@@ -21,7 +21,6 @@ $logsHeight: 150px;
 .column, .columnLogs {
   > div {
     height: 50%;
-    overflow: hidden;
   }
 }
 

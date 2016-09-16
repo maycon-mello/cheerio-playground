@@ -1,15 +1,19 @@
 @import 'variables';
 
 .container {
-  background: white;
+  background: #263238;
   height: 100%;
-  overflow: scroll;
-  border: 1px solid #ccc;
+  border: 1px solid #263238;
   font-family: monospace;
-  color: #aaa;
+  color: #1a7b72;
+  padding: $padding;
 }
 
 .log {
   font-size: 12px;
   padding: $padding / 2;
+}
+
+.title {
+  font-size: 11px;
 }

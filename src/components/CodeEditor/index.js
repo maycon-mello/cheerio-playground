@@ -2,19 +2,23 @@ import React, { Component, PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import Styles from './style.scss';
 import uuid from 'uuid';
-import brace from 'brace';
-import AceEditor from 'react-ace';
+import Codemirror from 'react-codemirror';
 
-import 'brace/mode/javascript';
-import 'brace/mode/html';
-import 'brace/theme/github';
+require('codemirror/mode/javascript/javascript');
+require('codemirror/mode/htmlmixed/htmlmixed');
+require('codemirror/addon/scroll/simplescrollbars.js');
+require('codemirror/addon/scroll/simplescrollbars.css');
+require('codemirror/lib/codemirror.css');
+require('codemirror/theme/material.css');
 
-const ACE_PROPS = {
-  $blockScrolling: true,
-}
+
+
+// <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/codemirror.css" rel="stylesheet" />
+// <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/theme/material.css" rel="stylesheet" />
+// <link href="https://codemirror.net/addon/scroll/simplescrollbars.css" rel="stylesheet" />
 
 export const EditorMode = {
-  html: 'html',
+  html: 'htmlmixed',
   js: 'javascript',
 }
 
@@ -29,27 +33,30 @@ export default class CodeEditor extends Component {
     this.props.onChange(newValue);
   }
 
-
+  componentDidMount() {
+    console.log(this.refs.editor);
+  }
   render() {
     let name = 'editor' + uuid();
     let { value, title, mode, readOnly } = this.props;
-
+    const options = {
+			lineNumbers: true,
+			readOnly,
+			mode,
+      theme: 'material',
+      scrollbarStyle: 'overlay',
+      height: '100%',
+		};
+    let iconName = readOnly ? 'eye' : 'code';
     return (
       <div styleName='container'>
-        <h2>{ title }</h2>
-        <AceEditor
-          styleName='ace_editor'
-          mode={mode}
-          theme='github'
-          onChange={this.onChange}
-          name={name}
-          width="100%"
-          height="350px"
-          readOnly={readOnly || false}
-          editorProps={ACE_PROPS}
+        <h2> <i className={`fa fa-${iconName}`}/>{ title }</h2>
+        <Codemirror
+          ref="editor"
           value={value}
-          fontSize={13}
-        />
+          onChange={this.onChange}
+          options={options}
+          interact={(cm) => console.log(cm)} />
       </div>
     );
   }
