@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   js: {
     test: /\.js$/,
-    loaders: 'babel',
+    loaders: ['babel'],
     include: path.join(__dirname, '../src'),
   },
   jsHot: {
