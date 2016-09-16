@@ -4,7 +4,8 @@
  */
 
 const { host, protocol } = window.location;
-const worker = new Worker(`${protocol}//${host}/public/parser.js`);
+const worker = new Worker(`${protocol}//${host}/static/parser.js`);
+
 
 export function parse({ js, htmlSource }) {
 

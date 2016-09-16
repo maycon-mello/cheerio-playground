@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const loaders = require('./loaders');
+const projectRootPath = path.resolve(__dirname, '../');
+const assetsPath = path.resolve(projectRootPath, './static');
 
 module.exports = {
   entry: {
@@ -13,9 +15,9 @@ module.exports = {
     parser: './src/parsers/index',
   },
   output: {
-    path: path.resolve(__dirname, '../'),
+    path: assetsPath,
     filename: '[name].js',
-    publicPath: '/public/',
+    publicPath: '/static/',
   },
   module: {
     loaders: [
