@@ -10,10 +10,16 @@ describe('Reducers', () => {
       expect(state).to.deep.equal(DEFAULT_STATE);
     });
 
-    it('should handle SET_JS', () => {
+    it('should handle SET_JS', (done) => {
       let value = 'const b = 2'
-      let state = code(undefined, actions.setJs(value));
-      expect(state.js).to.equal(value);
+      let fn = actions.setJs(value);
+
+      const dispatch = (action) => {
+        let state = code(undefined, action);
+        expect(state.js).to.equal(value);
+        done();
+      }
+      fn(dispatch);
     });
 
     it('should handle SET_AUTO_RUN', () => {
@@ -22,10 +28,15 @@ describe('Reducers', () => {
       expect(state.autoRun).to.equal(value);
     });
 
-    it('should handle SET_HTML_SOURCE', () => {
+    it('should handle SET_HTML_SOURCE', (done) => {
       let value = '<div>Test</div>'
-      let state = code(undefined, actions.setHtmlSource(value));
-      expect(state.htmlSource).to.equal(value);
+      let fn = actions.setHtmlSource(value);
+      const dispatch = (action) => {
+        let state = code(undefined, action);
+        expect(state.htmlSource).to.equal(value);
+        done();
+      }
+      fn(dispatch);
     });
 
     it('should handle SET_HTML_OUTPUT', () => {

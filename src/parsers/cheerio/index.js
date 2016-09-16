@@ -9,15 +9,13 @@ export default class Cheerio {
     let html;
     let cheerioEvalAddLog = (log) => logs.push(log.toString());
 
-    jsCode = jsCode.replace(/console\.log/i, 'cheerioEvalAddLog');
-
-    console.log(jsCode);
+    jsCode = jsCode.replace(/console\.log/g, 'cheerioEvalAddLog');
 
     try {
       let $ = cheerio.load(sourceHtml);
 
-      // let global = { $, cheerio };
-      // require('./helpers')(global);
+      let global = { $, cheerio };
+      helpers(cheerio, global);
       {
         eval(jsCode);
       }
@@ -25,7 +23,7 @@ export default class Cheerio {
     } catch (err) {
       error = err.toString();
     }
-    console.log({html, error, logs});
+
     return {html, error, logs};
   }
 }

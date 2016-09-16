@@ -1,11 +1,23 @@
+/**
+ * Mock for Web Worker
+ *
+ */
 import Cheerio from '../../src/parsers/cheerio';
 
-class Worker {
+export default class Worker {
 
+  /**
+   * @param {string} url
+   */
   constructor(url) {
     this.listeners = [];
   }
 
+  /**
+   *
+   * @param {string} htmlSource
+   * @param {string} js code
+   */
   postMessage({ htmlSource, js }) {
     let output = Cheerio.parse(htmlSource, js);
 
@@ -16,10 +28,13 @@ class Worker {
     this.listeners.forEach(listener => listener(event));
   }
 
+  /**
+   *
+   * @param {string} type
+   * @param {function} listener
+   */
   addEventListener(type, listener) {
     this.listeners.push(listener);
   }
 
 }
-
-global.Worker = Worker;

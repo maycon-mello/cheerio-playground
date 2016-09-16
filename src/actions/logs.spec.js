@@ -22,6 +22,16 @@ describe('Actions', () => {
       });
     });
 
+    it('logColor should create LOG_COLOR action', () => {
+      const color = 'blue';
+      const action = actions.setLogColor(color);
+
+      expect(action).to.deep.equal({
+        type: actions.LOG_COLOR,
+        value: color,
+      });
+    });
+
     it('showLogs should create SHOW_LOGS action', () => {
       const action = actions.showLogs(true);
 

@@ -4,8 +4,6 @@
 
 }
 
-
-
 .run, .logs, .clearLogs {
   padding: $padding * 2;
   background: #1A7B72;
@@ -32,12 +30,11 @@
   span {
     top: 4px;
     right: 2px;
-    padding: 0 4px;
+    padding: 0 $padding - 1;
     position: absolute;
     font-size: 9px;
     background: white;
     color: black;
-    // padding: 5px;
     border-radius: 50%;
   }
 }

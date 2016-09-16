@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, hashHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { Router, browserHistory } from 'react-router';
 
 import routes from './routes';
 import configureStore from './store/configureStore';
@@ -13,7 +12,7 @@ import './style/style.global.scss';
 const store = configureStore();
 
 render(
-  <Provider store={store} history={hashHistory}>
+  <Provider store={store} history={browserHistory}>
     <Router routes={routes} />
   </Provider>,
   document.getElementById('root')

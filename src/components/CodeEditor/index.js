@@ -33,9 +33,6 @@ export default class CodeEditor extends Component {
     this.props.onChange(newValue);
   }
 
-  componentDidMount() {
-    console.log(this.refs.editor);
-  }
   render() {
     let name = 'editor' + uuid();
     let { value, title, mode, readOnly } = this.props;
@@ -46,6 +43,7 @@ export default class CodeEditor extends Component {
       theme: 'material',
       scrollbarStyle: 'overlay',
       height: '100%',
+      smartIndent: true,
 		};
     let iconName = readOnly ? 'eye' : 'code';
     return (
@@ -55,8 +53,7 @@ export default class CodeEditor extends Component {
           ref="editor"
           value={value}
           onChange={this.onChange}
-          options={options}
-          interact={(cm) => console.log(cm)} />
+          options={options} />
       </div>
     );
   }

@@ -6,13 +6,17 @@ import * as logActions from './logs';
 describe('Actions', () => {
   describe('Code', () => {
 
-    it('setHtmlSource should create SET_HTML_SOURCE action', () => {
+    it('setHtmlSource should create SET_HTML_SOURCE action', (done) => {
       const value = `<div>Test</div>`;
-      const action = actions.setHtmlSource(value);
-      expect(action).to.deep.equal({
-        type: actions.SET_HTML_SOURCE,
-        value,
-      });
+      const fn = actions.setHtmlSource(value);
+      const dispatch = function(action) {
+        expect(action).to.deep.equal({
+          type: actions.SET_HTML_SOURCE,
+          value,
+        });
+        done();
+      };
+      fn(dispatch, () => {})
     });
 
     it('setAutoRun should create SET_AUTO_RUN action', () => {
@@ -33,13 +37,17 @@ describe('Actions', () => {
       });
     });
 
-    it('setJs should create SET_JS action', () => {
+    it('setJs should create SET_JS action', (done) => {
       const value = `const b = 2`;
-      const action = actions.setJs(value);
-      expect(action).to.deep.equal({
-        type: actions.SET_JS,
-        value,
-      });
+      const fn = actions.setJs(value);
+      const dispatch = function(action) {
+        expect(action).to.deep.equal({
+          type: actions.SET_JS,
+          value,
+        });
+        done();
+      };
+      fn(dispatch, () => {});
     });
 
     it('run should create SET_HTML_OUTPUT action', (done) => {
@@ -56,11 +64,12 @@ describe('Actions', () => {
       const fn = actions.run();
       expect(fn).to.be.a('function');
 
-      const dispatch = function(action) {
-        expect(action).to.deep.equal({
-          type: actions.SET_HTML_OUTPUT,
-          value: htmlOutput,
-        });
+      const dispatch = function({type, value}) {
+        if (type !== actions.SET_HTML_OUTPUT) {
+          return;
+        }
+        expect(type).to.equal(actions.SET_HTML_OUTPUT);
+        expect(value).to.be.ok;
         done();
       };
 
@@ -78,9 +87,12 @@ describe('Actions', () => {
       const fn = actions.run();
       expect(fn).to.be.a('function');
 
-      const dispatch = function(action) {
-        expect(action.type).to.equal(logActions.ADD_LOG);
-        expect(action.value).to.be.ok;
+      const dispatch = function({type, value}) {
+        if (type !== logActions.ADD_LOG) {
+          return;
+        }
+        expect(type).to.equal(logActions.ADD_LOG);
+        expect(value).to.be.ok;
         done();
       };
 
