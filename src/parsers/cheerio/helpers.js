@@ -1,9 +1,10 @@
+/**
+ * This is a third party code
+ * TODO: Refactor it
+ */
+export default function helpers(cheerio, global) {
+  let { $ } = global;
 
-export default function(cheerio, global) {
-  helpers(cheerio, global)
-}
-
-function helpers(cheerio, global) {
   // rename tag e.g. $("div").name("span")
   cheerio.prototype.name = function(tagName) {
       return this.each(function(_, elem) {

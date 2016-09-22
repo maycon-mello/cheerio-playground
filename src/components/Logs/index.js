@@ -7,7 +7,7 @@ export default class Logs extends Component {
 
   render() {
     let logs = this.props.logs.map(log => {
-      return <div styleName='log'>{log}</div>
+      return <div styleName='log'>{ log.toString() }</div>
     });
 
     return (

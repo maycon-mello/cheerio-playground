@@ -13,11 +13,11 @@ describe('Parsers', () => {
       let output = `
         <div class="test"></div>
         <div class="test"></div>
-      `
+      `;
 
       let js = `
         $('div').addClass('test');
-      `
+      `;
 
       let cheerio = Cheerio.parse(source, js);
 
@@ -33,7 +33,7 @@ describe('Parsers', () => {
 
       let js = `
         $.find('div').addClass('test');
-      `
+      `;
 
       let cheerio = Cheerio.parse(source, js);
 
