@@ -1,5 +1,5 @@
 import cheerio from 'cheerio';
-import helpers from './helpers';
+import './helpers';
 
 export default class Cheerio {
 
@@ -9,30 +9,20 @@ export default class Cheerio {
     let html;
 
     // Console log function
-    let cheerioEvalAddLog = (...args) => {
+    let addLog = (...args) => {
       let log = '';
       args.forEach((obj) => { log += obj.toString() + ' '});
       logs.push(log);
-    }
+    };
 
-    jsCode = jsCode.replace(/console\.log/g, 'cheerioEvalAddLog');
+    jsCode = jsCode.replace(/console\.log/g, '___consoleLog');
 
     try {
       let $ = cheerio.load(sourceHtml);
       self.$ = $;
 
-      let global = { $, cheerio };
+      exec(jsCode, addLog, $);
 
-      helpers(cheerio, global);
-
-      // Creating node global variables in Web Worker
-      for (let key in global) {
-        self[key] = global[key];
-      }
-
-      {
-        eval(jsCode);
-      }
       html = $.html();
     } catch (err) {
       error = err.toString();
@@ -40,4 +30,8 @@ export default class Cheerio {
 
     return {html, error, logs};
   }
+}
+
+function exec(___jsCode, ___consoleLog, $) {
+  eval(___jsCode);
 }

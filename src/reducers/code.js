@@ -5,10 +5,10 @@ import {
   SET_AUTO_RUN,
 } from '../actions/code';
 
-import * as defaultState from './code/defaultState';
+import * as examples from '../data/examples';
 import indentHtml from './code/indentHtml';
 
-export const DEFAULT_STATE = defaultState ;
+export const DEFAULT_STATE = examples.start;
 
 export default (state = DEFAULT_STATE, action) => {
   switch(action.type) {
