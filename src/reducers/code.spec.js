@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import { spy } from 'sinon';
 import * as actions from '../actions/code';
 import code, { DEFAULT_STATE } from './code';
 
@@ -11,14 +10,14 @@ describe('Reducers', () => {
     });
 
     it('should handle SET_JS', (done) => {
-      let value = 'const b = 2'
+      let value = 'const b = 2';
       let fn = actions.setJs(value);
 
       const dispatch = (action) => {
         let state = code(undefined, action);
         expect(state.js).to.equal(value);
         done();
-      }
+      };
       fn(dispatch);
     });
 
@@ -29,18 +28,18 @@ describe('Reducers', () => {
     });
 
     it('should handle SET_HTML_SOURCE', (done) => {
-      let value = '<div>Test</div>'
+      let value = '<div>Test</div>';
       let fn = actions.setHtmlSource(value);
       const dispatch = (action) => {
         let state = code(undefined, action);
         expect(state.htmlSource).to.equal(value);
         done();
-      }
+      };
       fn(dispatch);
     });
 
     it('should handle SET_HTML_OUTPUT', () => {
-      let value = '<div>Test</div>'
+      let value = '<div>Test</div>';
       let state = code(undefined, actions.setHtmlOutput(value));
       expect(state.htmlOutput).to.equal(value);
     });

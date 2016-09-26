@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import { spy } from 'sinon';
 import Cheerio from './index';
 
 describe('Parsers', () => {

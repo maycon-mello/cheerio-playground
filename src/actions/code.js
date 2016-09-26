@@ -1,4 +1,10 @@
-import * as Parser from '../parsers/client';
+/*
+ * @flow
+ *
+ * TODO: move async code to a redux saga
+ */
+import Parser from '../parsers/client';
+import { Action, Dispatch, GetState, ThunkAction } from './types';
 import { addLog, clearLogs } from './logs';
 
 export const SET_JS = 'SET_JS';
@@ -8,51 +14,83 @@ export const SET_AUTO_RUN = 'SET_AUTO_RUN';
 
 const AUTO_RUN_DELAY = 150;
 
-let autoRunTimeout;
+let autoRunTimeout: number;
 
-function autoRun(dispatch) {
+/**
+ * Auto run
+ * @param {Dispatch} dispatch function
+ */
+function autoRun(dispatch: Dispatch): void {
   clearTimeout(autoRunTimeout);
-  autoRunTimeout = setTimeout(
-    () => dispatch(run()),
-    AUTO_RUN_DELAY
-  );
+  autoRunTimeout = setTimeout(() => dispatch(run()), AUTO_RUN_DELAY);
 }
 
-export const setHtmlOutput = (value) => ({
-  type: SET_HTML_OUTPUT,
-  value,
-});
+/**
+ * Set the html output
+ *
+ * @param {string} value
+ * @return {Action} action
+ */
+export function setHtmlOutput(value: String): Action {
+  return {
+    type: SET_HTML_OUTPUT,
+    value,
+  };
+}
 
-export const setAutoRun = (value) => ({
-  type: SET_AUTO_RUN,
-  value,
-});
+/**
+ * Enable or disable auto run
+ *
+ * @param {boolean} value
+ * @return {Action} action
+ */
+export function setAutoRun(value: Boolean): Action {
+  return {
+    type: SET_AUTO_RUN,
+    value,
+  };
+}
 
-export const setHtmlSource = (value) => {
-  return (dispatch) => {
+/**
+ * Set the html source
+ *
+ * @param {string} value
+ * @return {ThunkAction} tuhnk
+ */
+export function setHtmlSource(value: String): ThunkAction {
+  return (dispatch: Dispatch) => {
     dispatch({
       type: SET_HTML_SOURCE,
       value,
     });
     autoRun(dispatch);
-  }
+  };
 }
 
-export const setJs = (value) => {
-  return (dispatch) => {
+/**
+ * Set the js code
+ *
+ * @param {string} value
+ * @return {ThunkAction} tuhnk
+ */
+export function setJs(value: String): ThunkAction {
+  return (dispatch: Dispatch) => {
     dispatch({
       type: SET_JS,
       value,
     });
     autoRun(dispatch);
-  }
+  };
 }
 
-export const run = () =>
-  (dispatch, getState) => {
+/**
+ * Parse the code and dispatch setHtmlOutput action
+ *
+ * @return {ThunkAction} tunk to be executed
+ */
+export function run(): ThunkAction {
+  return async function (dispatch: Dispatch, getState: GetState) {
     let { code, logs } = getState();
-
-    let { js, htmlSource } = code;
     let preserveLogs = logs && logs.preserveLogs;
 
     if (!preserveLogs) {
@@ -60,18 +98,14 @@ export const run = () =>
     }
 
     // Parse the code
-    Parser
-      .parse({ js, htmlSource })
-      .then(({ html, error, logs }) => {
+    let { error, html, logs: resultLogs } = await Parser.parse(code);
 
-        // If there is an error create the error log
-        if (error) {
-          return dispatch(addLog(error));
-        }
+    if (error) {
+      return dispatch(addLog(error));
+    }
 
-        dispatch(setHtmlOutput(html));
-        if (logs) {
-          logs.forEach(log => dispatch(addLog(log)));
-        }
-      });
+    dispatch(setHtmlOutput(html));
+
+    resultLogs.forEach(log => dispatch(addLog(log)));
   };
+}

@@ -6,12 +6,16 @@ import {
 } from '../actions/code';
 
 import * as examples from '../data/examples';
-import indentHtml from './code/indentHtml';
 
-export const DEFAULT_STATE = examples.start;
+const { htmlSource, js } = examples.start;
+
+export const DEFAULT_STATE = {
+  htmlSource,
+  js,
+};
 
 export default (state = DEFAULT_STATE, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SET_JS:
       return {
         ...state,
@@ -25,10 +29,9 @@ export default (state = DEFAULT_STATE, action) => {
       };
 
     case SET_HTML_OUTPUT:
-      let value = indentHtml(action.value);
       return {
         ...state,
-        htmlOutput: value,
+        htmlOutput: action.value,
       };
 
     case SET_AUTO_RUN:

@@ -11,7 +11,7 @@ export default class Cheerio {
     // Console log function
     let addLog = (...args) => {
       let log = '';
-      args.forEach((obj) => { log += obj.toString() + ' '});
+      args.forEach(obj => (log += obj.toString() + ' '));
       logs.push(log);
     };
 
@@ -28,7 +28,7 @@ export default class Cheerio {
       error = err.toString();
     }
 
-    return {html, error, logs};
+    return { html, error, logs };
   }
 }
 

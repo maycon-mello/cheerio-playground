@@ -11,7 +11,7 @@ describe('Reducers', () => {
     });
 
     it('should handle ADD_LOG', () => {
-      let value = 'test'
+      let value = 'test';
       let state = logs(undefined, actions.addLog(value));
       expect(state.logs.length).to.equal(1);
       expect(state.logs[0]).to.equal(value);

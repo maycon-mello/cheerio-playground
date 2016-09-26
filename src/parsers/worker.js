@@ -5,7 +5,7 @@
 
 import Cheerio from './cheerio';
 
-self.addEventListener('message', function (e) {
+self.addEventListener('message', (e) => {
   let { js, htmlSource } = e.data;
 
   let output = Cheerio.parse(htmlSource, js);

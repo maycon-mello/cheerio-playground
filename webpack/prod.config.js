@@ -9,7 +9,7 @@ module.exports = {
   devtool: 'source-map',
   entry: {
     bundle: './src/index',
-    parser: './src/parsers/index',
+    parser: './src/parsers/worker',
   },
   output: {
     path: assetsPath,

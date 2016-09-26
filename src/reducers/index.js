@@ -7,7 +7,7 @@ import logs from './logs';
 const rootReducer = combineReducers({
   code,
   logs,
-  routing
+  routing,
 });
 
 export default rootReducer;

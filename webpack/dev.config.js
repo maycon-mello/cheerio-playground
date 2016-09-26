@@ -12,7 +12,7 @@ module.exports = {
       'webpack-hot-middleware/client',
         './src/index',
     ],
-    parser: './src/parsers/index',
+    parser: './src/parsers/worker',
   },
   output: {
     path: assetsPath,

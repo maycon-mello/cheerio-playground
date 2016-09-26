@@ -1,18 +1,3 @@
-import React, { Component, PropTypes } from 'react';
-import CodeEditor, { EditorMode } from '../CodeEditor';
+import RawOutput from './RawOutput';
 
-export default class RawOutput extends Component {
-
-  render() {
-    let { htmlOutput } = this.props;
-
-    return (
-      <CodeEditor
-        title='Raw output'
-        mode={EditorMode.html}
-        readOnly={true}
-        value={htmlOutput}
-      />
-    );
-  }
-}
+export default RawOutput;

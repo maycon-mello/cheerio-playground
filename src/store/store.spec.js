@@ -9,20 +9,19 @@ import * as logs from '../actions/logs';
 
 describe('Store', () => {
   describe('Code', () => {
-
     it('should have logs and code state', () => {
       const store = configureStore();
-      const { code, logs } = store.getState();
+      let state = store.getState();
 
-      expect(code).to.be.ok;
-      expect(logs).to.be.ok;
+      expect(state.code).to.be.ok;
+      expect(state.logs).to.be.ok;
     });
 
     it('should parse the html code without errors', (done) => {
       const store = configureStore();
-      const htmlSource = "<div>Test</div>";
-      const js = "$('div').addClass('test');";
-      const htmlOutput = `<div class="test">Test</div>`;
+      const htmlSource = '<div>Test</div>';
+      const js = '$("div").addClass("test");';
+      const htmlOutput = '<div class="test">Test</div>';
 
       store.dispatch(logs.setPreserveLogs(true));
       store.dispatch(code.setJs(js));
@@ -40,7 +39,7 @@ describe('Store', () => {
 
     it('should parse with errors', (done) => {
       const store = configureStore();
-      const htmlSource = "<div>Test</div>";
+      const htmlSource = '<div>Test</div>';
       const js = "$.find('div').addClass('test');";
 
       store.dispatch(logs.setPreserveLogs(true));
@@ -53,6 +52,5 @@ describe('Store', () => {
       });
       store.dispatch(code.run());
     });
-
   });
 });

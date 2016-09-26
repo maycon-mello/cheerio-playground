@@ -12,19 +12,17 @@ const store = configureStore();
 
 const getProps = () => ({
   ...store.getState(),
-  actions: {}
+  actions: {},
 });
 
 describe('<App />', () => {
-
   it('should render a HTMLEditor component', () => {
-    const app = shallow(<App {...getProps()} />);
+    const app = shallow(<App {...getProps()}/>);
     expect(app.find(HTMLEditor)).to.have.length(1);
   });
 
   it('should render a JavaScriptEditor component', () => {
-    const app = shallow(<App {...getProps()} />);
+    const app = shallow(<App {...getProps()}/>);
     expect(app.find(JavaScriptEditor)).to.have.length(1);
   });
-
 });

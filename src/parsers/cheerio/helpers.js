@@ -1,20 +1,24 @@
 import cheerio from 'cheerio';
 
+if (!self) {
+  var self = global;
+}
+
 cheerio.prototype.options.withDomLvl1 = false;
 
 const slice = Array.prototype.slice;
 
 function copy(node, children, next, prev, parent) {
-    return {
-        // __proto__: node.__proto__, // uncomment if withDomLvl1 is true
-        type: node.type,
-        name: node.name,
-        attribs: node.attribs,
-        children: children,
-        next: next,
-        prev: prev,
-        parent: parent
-    };
+  return {
+    // __proto__: node.__proto__, // uncomment if withDomLvl1 is true
+    type: node.type,
+    name: node.name,
+    attribs: node.attribs,
+    children,
+    next,
+    prev,
+    parent,
+  };
 }
 
 /**
@@ -24,32 +28,32 @@ function copy(node, children, next, prev, parent) {
  * @param {string} content Content.
  */
 self.tag = function(name, attribs, content) {
-    let type = name === 'script' || name === 'style' ? name : 'tag';
-    return {
-        // for some reason <script> and <style> aren't exactly elements in htmlparser2
-        // __proto__: type == 'tag' ? ElementPrototype : NodePrototype, // uncomment if withDomLvl1 is true
-        type: type,
-        name: name,
-        attribs: attribs || {},
-        children: content ? [txt(content)] : [],
-        next: null,
-        prev: null,
-        parent: null
-    };
+  let type = name === 'script' || name === 'style' ? name : 'tag';
+  return {
+    // for some reason <script> and <style> aren't exactly elements in htmlparser2
+    // __proto__: type == 'tag' ? ElementPrototype : NodePrototype, // uncomment if withDomLvl1 is true
+    type,
+    name,
+    attribs: attribs || {},
+    children: content ? [txt(content)] : [],
+    next: null,
+    prev: null,
+    parent: null,
+  };
 };
 /**
  * @global
  * @param {string} content Content.
  */
 self.txt = function(content) {
-    return {
-        // __proto__: NodePrototype, // uncomment if withDomLvl1 is true
-        data: content,
-        type: 'text',
-        next: null,
-        prev: null,
-        parent: null
-    };
+  return {
+    // __proto__: NodePrototype, // uncomment if withDomLvl1 is true
+    data: content,
+    type: 'text',
+    next: null,
+    prev: null,
+    parent: null,
+  };
 };
 /**
  * @method replace
@@ -61,15 +65,15 @@ self.txt = function(content) {
  * @example
  * $body.find("div").replace("data-id", "0", "");
  */
-cheerio.prototype.replace = function(attr, oldVal, newVal) {
-    for (let i = 0, len = this.length; i < len; i++) {
-        if (this[i].type === 'tag') {
-            if (this[i].attribs[attr] !== undefined) {
-                this[i].attribs[attr] = this[i].attribs[attr].replace(oldVal, newVal);
-            }
-        }
+cheerio.prototype.replace = function (attr, oldVal, newVal) {
+  for (let i = 0, len = this.length; i < len; i++) {
+    if (this[i].type === 'tag') {
+      if (this[i].attribs[attr] !== undefined) {
+        this[i].attribs[attr] = this[i].attribs[attr].replace(oldVal, newVal);
+      }
     }
-    return this;
+  }
+  return this;
 };
 /**
  * @method name
@@ -79,11 +83,11 @@ cheerio.prototype.replace = function(attr, oldVal, newVal) {
  * @example
  * $body.find("div").name("span");
  */
-cheerio.prototype.name = function(tagName) {
-    for (let i = 0, len = this.length; i < len; i++) {
-        this[i].name = tagName;
-    }
-    return this;
+cheerio.prototype.name = function (tagName) {
+  for (let i = 0, len = this.length; i < len; i++) {
+    this[i].name = tagName;
+  }
+  return this;
 };
 /**
  * @method removeAttrs
@@ -92,11 +96,11 @@ cheerio.prototype.name = function(tagName) {
  * @example
  * $body.find("div").removeAttrs();
  */
-cheerio.prototype.removeAttrs = function() {
-    for (let i = 0, len = this.length; i < len; i++) {
-        this[i].attribs = {};
-    }
-    return this;
+cheerio.prototype.removeAttrs = function () {
+  for (let i = 0, len = this.length; i < len; i++) {
+    this[i].attribs = {};
+  }
+  return this;
 };
 // [Note: all .wrap()-related methods are all written with a specific signature,
 // since the originals naturally accept "tag()" arguments. However, they are
@@ -111,38 +115,41 @@ cheerio.prototype.removeAttrs = function() {
  * @example
  * $body.find("div").wrapTextChildren("span", {class: "class"});
  */
-cheerio.prototype.wrapTextChildren = function(node, ignore_empty) {
-    if (typeof node !== 'object') {
-        node = tag.apply(null, arguments);
-    }
-    for (let i = 0, len = this.length; i < len; i++) {
-        let elem = this[i], children = elem.children;
-        for (let i = 0, len = children.length; i < len; i++) {
-            let child = children[i];
-            if (child.type === 'text') {
-                if ( (child.data === null || child.data.trim() === '') && ignore_empty === true) {
-                    // if empty and we are ignoring empty, do nothing
-                } else {
-                    let clone = copy(node, [child], child.next, child.prev, child.parent);
-                    let next = child.next, prev = child.prev, root = child.root;
-                    if (next) {
-                        next.prev = clone;
-                    }
-                    if (prev) {
-                        prev.next = clone;
-                    }
-                    if (root) {
-                        clone.root = root;
-                        child.root = null;
-                    }
-                    child.next = child.prev = null;
-                    child.parent = clone;
-                    children[i] = clone;
-                }
-            }
+cheerio.prototype.wrapTextChildren = function (node, ignoreEmpty) {
+  if (typeof node !== 'object') {
+    node = tag.apply(null, arguments);
+  }
+  for (let i = 0, len = this.length; i < len; i++) {
+    let elem = this[i], children = elem.children;
+    for (let i = 0, len = children.length; i < len; i++) {
+      let child = children[i];
+      if (child.type === 'text') {
+        if ((child.data === null || child.data.trim() === '') && ignoreEmpty === true) {
+          // if empty and we are ignoring empty, do nothing
+        } else {
+          let clone = copy(node, [child], child.next, child.prev, child.parent);
+          let next = child.next;
+          let prev = child.prev;
+          let root = child.root;
+
+          if (next) {
+            next.prev = clone;
+          }
+          if (prev) {
+            prev.next = clone;
+          }
+          if (root) {
+            clone.root = root;
+            child.root = null;
+          }
+          child.next = child.prev = null;
+          child.parent = clone;
+          children[i] = clone;
         }
+      }
     }
-    return this;
+  }
+  return this;
 };
 /**
  * @method wrap

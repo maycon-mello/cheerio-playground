@@ -1,29 +1,16 @@
 const path = require('path');
 const express = require('express');
-const app = express();
 
+const app = express();
 const port = (process.env.PORT || 8080);
 const indexFile = path.join(__dirname, './index.html');
 const publicPath = express.static(path.join(__dirname, './static'));
 
 app.use('/static', publicPath);
-app.get('/', function (_, res) { res.sendFile(indexFile) });
+app.get('/', (_, res) => res.sendFile(indexFile));
 
 if (process.env.NODE_ENV !== 'production') {
-  const webpack = require('webpack');
-  const webpackDevMiddleware = require('webpack-dev-middleware');
-  const webpackHotMiddleware = require('webpack-hot-middleware');
-  const config = require('./webpack/dev.config.js');
-  const compiler = webpack(config);
-
-  app.use(webpackHotMiddleware(compiler, {
-    log: console.log
-  }));
-
-  app.use(webpackDevMiddleware(compiler, {
-    noInfo: false,
-    publicPath: config.output.publicPath
-  }));
+  require('./webpack/devServer.js')(app);
 }
 
 app.listen(port);

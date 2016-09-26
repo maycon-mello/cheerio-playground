@@ -1,11 +1,10 @@
 import { expect } from 'chai';
-import { spy } from 'sinon';
 import * as actions from './logs';
 
 describe('Actions', () => {
   describe('Logs', () => {
     it('addLog should create ADD_LOG action', () => {
-      const value = `test log`;
+      const value = 'test log';
       const action = actions.addLog(value);
 
       expect(action).to.deep.equal({
@@ -18,17 +17,7 @@ describe('Actions', () => {
       const action = actions.clearLogs();
 
       expect(action).to.deep.equal({
-        type: actions.CLEAR_LOGS
-      });
-    });
-
-    it('logColor should create LOG_COLOR action', () => {
-      const color = 'blue';
-      const action = actions.setLogColor(color);
-
-      expect(action).to.deep.equal({
-        type: actions.LOG_COLOR,
-        value: color,
+        type: actions.CLEAR_LOGS,
       });
     });
 

@@ -11,9 +11,8 @@ let props = {
 };
 
 describe('<HTMLEditor />', () => {
-
   it('should render a CodeEditor component', () => {
-    const app = shallow( <HTMLEditor {...props}/>);
+    const app = shallow(<HTMLEditor {...props}/>);
     expect(app.find(CodeEditor)).to.have.length(1);
   });
 
@@ -21,7 +20,7 @@ describe('<HTMLEditor />', () => {
     const setHtmlSource = spy();
     const app = shallow(
       <HTMLEditor
-        htmlSource='test'
+        htmlSource="test"
         setHtmlSource={setHtmlSource}
       />
     );
@@ -33,5 +32,4 @@ describe('<HTMLEditor />', () => {
     onChange.apply(null, ['new value']);
     expect(onChange).to.have.property('callCount', 1);
   });
-
 });

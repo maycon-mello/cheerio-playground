@@ -6,7 +6,7 @@ export const htmlSource =
 
   </head>
   <body>
-  	<div class="images">
+    <div class="images">
       <img src="http://placekitten.com/g/200/200"/>
       <img src="http://placekitten.com/g/200/200"/>
       <img src="http://placekitten.com/g/200/200"/>
