@@ -5,17 +5,20 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "flow": "./node_modules/.bin/nodemon --watch ./src --exec 'flow; test $? -eq 0 -o $? -eq 2'",
+    "serve": "node server.dev",
+    "flow": "./node_modules/.bin/nodemon --watch ./app --exec 'flow; test $? -eq 0 -o $? -eq 2'",
     "postinstall": "./node_modules/.bin/webpack --config ./webpack/prod.config.js --progress --colors",
     "test:karma": "./node_modules/.bin/karma start",
-    "test": "./node_modules/.bin/nodemon --ext spec.js --watch ./src --watch ./test --exec 'NODE_ENV=test ./node_modules/.bin/mocha $(find src -name '*.spec.js')  --recursive --compilers js:babel-register --require ./test/config.js'",
-    "lint": "./node_modules/.bin/eslint -c .eslintrc  src/",
-    "lint:watch": "./node_modules/.bin/nodemon --watch ./src --exec 'npm run lint'"
+    "test": "./node_modules/.bin/nodemon --ext spec.js --watch ./app --watch ./test --exec 'NODE_ENV=test ./node_modules/.bin/mocha $(find app -name '*.spec.js')  --recursive --compilers js:babel-register --require ./test/config.js'",
+    "test:api": "./node_modules/.bin/nodemon --ext spec.js --watch ./api --watch ./test --exec 'NODE_ENV=test ./node_modules/.bin/mocha $(find api -name '*.spec.js')  --recursive --compilers js:babel-register --require ./test/config.js'",
+    "lint": "./node_modules/.bin/eslint -c .eslintrc  app/",
+    "lint:watch": "./node_modules/.bin/nodemon --watch ./app --exec 'npm run lint'"
   },
   "dependencies": {
     "cheerio": "^0.22.0",
     "font-awesome": "^4.6.3",
     "json-loader": "^0.5.4",
+    "mongoose": "^4.6.1",
     "nodemon": "^1.10.2",
     "react": "^15.3.1",
     "react-ace": "^3.5.0",
@@ -31,7 +34,8 @@
     "redux-localstorage": "^0.4.1",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
-    "uuid": "^2.0.2"
+    "uuid": "^2.0.2",
+    "winston": "^2.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.1",
@@ -88,6 +92,7 @@
     "sass-loader": "^4.0.2",
     "sinon": "^1.17.5",
     "style-loader": "^0.13.1",
+    "supertest": "^2.0.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",
@@ -96,3 +101,4 @@
   "author": "",
   "license": "ISC"
 }
+

@@ -2,7 +2,7 @@
  * Mock for Web Worker
  *
  */
-import Cheerio from '../../src/parsers/cheerio';
+import Cheerio from '../../app/parsers/cheerio';
 
 export default class Worker {
 

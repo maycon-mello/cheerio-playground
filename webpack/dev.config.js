@@ -10,9 +10,9 @@ module.exports = {
     bundle: [
       'webpack/hot/dev-server',
       'webpack-hot-middleware/client',
-        './src/index',
+        './app/index',
     ],
-    parser: './src/parsers/worker',
+    parser: './app/parsers/worker',
   },
   output: {
     path: assetsPath,
@@ -33,7 +33,7 @@ module.exports = {
   },
   postcss: () => [autoprefixer],
   sassLoader: {
-    includePaths: ['node_modules', path.resolve(__dirname, '../src/style')]
+    includePaths: ['node_modules', path.resolve(__dirname, '../app/style')]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

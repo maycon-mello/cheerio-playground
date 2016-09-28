@@ -8,8 +8,8 @@ const assetsPath = path.resolve(projectRootPath, './static');
 module.exports = {
   devtool: 'source-map',
   entry: {
-    bundle: './src/index',
-    parser: './src/parsers/worker',
+    bundle: './app/index',
+    parser: './app/parsers/worker',
   },
   output: {
     path: assetsPath,
@@ -30,7 +30,7 @@ module.exports = {
   },
   postcss: () => [autoprefixer],
   sassLoader: {
-    includePaths: [path.resolve(__dirname, '../src/style')]
+    includePaths: [path.resolve(__dirname, '../app/style')]
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({

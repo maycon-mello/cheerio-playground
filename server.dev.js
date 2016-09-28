@@ -1,6 +1,8 @@
+require('babel-register');
 const path = require('path');
 const express = require('express');
-const api = require('./build/api');
+const api = require('./api').default;
+const devServer = require('./webpack/devServer.js');
 
 const app = express();
 const port = (process.env.PORT || 8080);
@@ -12,6 +14,12 @@ app.get('/', (_, res) => res.sendFile(indexFile));
 
 api(app);
 
+if (process.env.NODE_ENV !== 'test') {
+  devServer(app);
+}
+
 app.listen(port);
 
 console.log(`Listening at http://localhost:${port}`);
+
+module.exports = app;

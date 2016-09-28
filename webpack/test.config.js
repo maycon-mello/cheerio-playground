@@ -19,6 +19,6 @@ module.exports = {
   },
   postcss: () => [autoprefixer],
   sassLoader: {
-    includePaths: [path.resolve(__dirname, '../src/style')]
+    includePaths: [path.resolve(__dirname, '../app/style')]
   }
 };
